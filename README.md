@@ -209,16 +209,21 @@ __block TATBaseAdView *adView = [TATMediaCenter initEmbedAdWithSlotId:self.slotI
     // 处理返回结果（UI布局或者错误处理）
 }];
 [self.view addSubview:adView];
-```
-
 self.adView = adView
+```
 
 **Swift**
 
 ```
-TATMediaCenter.showFullModeAd(withSlotId: slotId, loadingOption:YES) { (result, error)in
+// 插屏式
+TATMediaCenter.showFullModeAd(withSlotId: slotId, loadingOption:true) { (result, error)in
    // 结果处理
 }
+// 嵌入式
+let adView:TATBaseAdView = TATMediaCenter.initEmbedAd(withSlotId: slotId, loadingOption: true) { (result, error) in
+
+}
+self.adView = adView
 ```
 
 ## 4.6 自定义广告
@@ -237,9 +242,10 @@ TATMediaCenter.showFullModeAd(withSlotId: slotId, loadingOption:YES) { (result, 
 [TATMediaCenter reportExposureWithURL:exposureUrl];
 ​
 // 第3步：当用户点击素材时，须调用点击事件上报接口，同样clickUrl来自于上面返回的model中
+[TATMediaCenter reportClickWithURL:clickUrl];
+
 ```
 
-[TATMediaCenter reportClickWithURL:clickUrl];
 
 **Swift**
 
