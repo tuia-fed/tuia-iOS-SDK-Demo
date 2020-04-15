@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 #import <TATMediaSDK/TATMediaSDK.h>
 #import "ViewController.h"
-#import "TATSlotIDManager.h"
+#import "TATDiscoverViewController.h"
+#import "TATSettingViewController.h"
+#import "TATUserManager.h"
+#import "TATMediaManager.h"
 
 @interface AppDelegate ()
 
@@ -20,27 +23,63 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [TATMediaCenter setUserId:@"2020126"];
-    [TATMediaCenter startWithAppKey:@"RFH45U9e2mEpKxq2BHg6VqQm6HA" appSecret:@"3WoqJ6MwUZCMEtSgUojW8E4X2KCirUv4EgLhTLQ"];
+    [TATUserManager sharedInstance];
+    [TATMediaCenter startWithAppKey:[TATMediaManager appKey] appSecret:[TATMediaManager appSecret]];
     #if defined(DEBUG)
     [TATMediaCenter setLogEnable:YES];
     #else
     [TATMediaCenter setLogEnable:NO];
     #endif
-    
-    [TATMediaCenter showLaunchAdWithSlotId:[TATSlotIDManager slotIdForType:TATSimpleAdTypeLaunch] resultBlock:^(BOOL result, NSError *error) {
-        
-    } closeBlock:^(BOOL isClosedByUser) {
+    // [TATMediaCenter showLaunchAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeLaunch] resultBlock:nil];
+    TATLaunchAdConfiguration *config = [TATLaunchAdConfiguration defaultConfiguration];
+    config.sourceType = TATLaunchSourceTypeScreen;
+    config.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , [UIScreen mainScreen].bounds.size.height - 180);
+    [TATMediaCenter showLaunchAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeLaunch] configuration:config resultBlock:^(BOOL result, NSError *error) {
         
     }];
     [self initRootView];
+    
+    [TATMediaCenter sharedInstance].rewardHandler = ^(NSString * _Nullable rewardJson) {
+        NSString *message = [NSString stringWithFormat:@"激励发奖回调:%@", rewardJson];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    };
+    [TATMediaCenter sharedInstance].closeHandler = ^(NSString * _Nullable closeJson) {
+        NSString *message = [NSString stringWithFormat:@"激励关闭回调:%@", closeJson];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+
+    };
+    
+    [TATMediaCenter sharedInstance].closeH5Block = ^(NSString * _Nullable slotId){
+        NSString *message = [NSString stringWithFormat:@"关闭活动页回调:%@", slotId];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    };
     return YES;
 }
 
 - (void)initRootView {
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     ViewController *homepageVC = [[ViewController alloc] init];
     UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homepageVC];
-    self.window.rootViewController = homeNavi;
+    homeNavi.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"tabbar_hd"] tag:1];
+    TATDiscoverViewController *discoverVC = [[TATDiscoverViewController alloc] init];
+    UINavigationController *discoverNavi = [[UINavigationController alloc] initWithRootViewController:discoverVC];
+    discoverNavi.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:[UIImage imageNamed:@"tabbar_dt"] tag:2];
+    TATSettingViewController *settingVC = [[TATSettingViewController alloc] init];
+    settingVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"tabbar_me"] tag:3];
+    tabBarController.viewControllers = @[homeNavi, discoverNavi, settingVC];
+    self.window.rootViewController = tabBarController;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -62,11 +101,17 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+    }];
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"applicationWillTerminate");
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"time"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

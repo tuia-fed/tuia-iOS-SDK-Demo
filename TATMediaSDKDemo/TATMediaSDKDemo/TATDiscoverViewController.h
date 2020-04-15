@@ -1,5 +1,5 @@
 //
-//  TATSimpleAdViewController.h
+//  TATDiscoverViewController.h
 //  TATMediaSDKDemo
 //
 //  Created by wuleslie on 2019/12/19.
@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TATMediaManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TATSimpleAdViewController : UIViewController
-
-- (id)initWithAdType:(TATSimpleAdType)type;
+@interface TATDiscoverViewController : UIViewController
 
 @end
 

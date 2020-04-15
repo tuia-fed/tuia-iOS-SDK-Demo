@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF5E527023BB202900E990B3 /* TATSlotIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5E526F23BB202900E990B3 /* TATSlotIDManager.m */; };
+		AF51A6EF2446BC4800ACC2F3 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF51A6ED2446BC4700ACC2F3 /* app_icon@2x.png */; };
+		AF51A6F02446BC4800ACC2F3 /* app_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF51A6EE2446BC4800ACC2F3 /* app_icon@3x.png */; };
+		AF51A6F92446BC6B00ACC2F3 /* TATSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F22446BC6900ACC2F3 /* TATSettingViewController.m */; };
+		AF51A6FA2446BC6B00ACC2F3 /* TATMediaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F32446BC6A00ACC2F3 /* TATMediaManager.m */; };
+		AF51A6FB2446BC6B00ACC2F3 /* TATUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F52446BC6A00ACC2F3 /* TATUserManager.m */; };
+		AF51A6FC2446BC6B00ACC2F3 /* TATDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F72446BC6B00ACC2F3 /* TATDiscoverViewController.m */; };
 		AF6D338423AB29360065FDF3 /* TATSimpleAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6D338323AB29350065FDF3 /* TATSimpleAdViewController.m */; };
 		AF7061CE238FD0A40049710E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7061CD238FD0A40049710E /* AppDelegate.m */; };
 		AF7061D1238FD0A40049710E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7061D0238FD0A40049710E /* ViewController.m */; };
@@ -40,11 +45,19 @@
 
 /* Begin PBXFileReference section */
 		4CE7A442D91A717659BE5107 /* Pods-TATMediaSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TATMediaSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-TATMediaSDKDemo/Pods-TATMediaSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		AF5E526E23BB202900E990B3 /* TATSlotIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TATSlotIDManager.h; sourceTree = "<group>"; };
-		AF5E526F23BB202900E990B3 /* TATSlotIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TATSlotIDManager.m; sourceTree = "<group>"; };
+		AF51A6ED2446BC4700ACC2F3 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@2x.png"; sourceTree = "<group>"; };
+		AF51A6EE2446BC4800ACC2F3 /* app_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@3x.png"; sourceTree = "<group>"; };
+		AF51A6F12446BC6900ACC2F3 /* TATUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATUserManager.h; sourceTree = "<group>"; };
+		AF51A6F22446BC6900ACC2F3 /* TATSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATSettingViewController.m; sourceTree = "<group>"; };
+		AF51A6F32446BC6A00ACC2F3 /* TATMediaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATMediaManager.m; sourceTree = "<group>"; };
+		AF51A6F42446BC6A00ACC2F3 /* TATMediaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATMediaManager.h; sourceTree = "<group>"; };
+		AF51A6F52446BC6A00ACC2F3 /* TATUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATUserManager.m; sourceTree = "<group>"; };
+		AF51A6F62446BC6A00ACC2F3 /* TATSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATSettingViewController.h; sourceTree = "<group>"; };
+		AF51A6F72446BC6B00ACC2F3 /* TATDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATDiscoverViewController.m; sourceTree = "<group>"; };
+		AF51A6F82446BC6B00ACC2F3 /* TATDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATDiscoverViewController.h; sourceTree = "<group>"; };
 		AF6D338223AB29350065FDF3 /* TATSimpleAdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TATSimpleAdViewController.h; sourceTree = "<group>"; };
 		AF6D338323AB29350065FDF3 /* TATSimpleAdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TATSimpleAdViewController.m; sourceTree = "<group>"; };
-		AF7061C9238FD0A40049710E /* TuiaSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuiaSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF7061C9238FD0A40049710E /* TATMediaSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TATMediaSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7061CC238FD0A40049710E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF7061CD238FD0A40049710E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF7061CF238FD0A40049710E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -100,7 +113,7 @@
 		AF7061CA238FD0A40049710E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF7061C9238FD0A40049710E /* TuiaSDKDemo.app */,
+				AF7061C9238FD0A40049710E /* TATMediaSDKDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,8 +133,14 @@
 				AF7061DB238FD0A60049710E /* main.m */,
 				AF6D338223AB29350065FDF3 /* TATSimpleAdViewController.h */,
 				AF6D338323AB29350065FDF3 /* TATSimpleAdViewController.m */,
-				AF5E526E23BB202900E990B3 /* TATSlotIDManager.h */,
-				AF5E526F23BB202900E990B3 /* TATSlotIDManager.m */,
+				AF51A6F82446BC6B00ACC2F3 /* TATDiscoverViewController.h */,
+				AF51A6F72446BC6B00ACC2F3 /* TATDiscoverViewController.m */,
+				AF51A6F42446BC6A00ACC2F3 /* TATMediaManager.h */,
+				AF51A6F32446BC6A00ACC2F3 /* TATMediaManager.m */,
+				AF51A6F62446BC6A00ACC2F3 /* TATSettingViewController.h */,
+				AF51A6F22446BC6900ACC2F3 /* TATSettingViewController.m */,
+				AF51A6F12446BC6900ACC2F3 /* TATUserManager.h */,
+				AF51A6F52446BC6A00ACC2F3 /* TATUserManager.m */,
 			);
 			path = TATMediaSDKDemo;
 			sourceTree = "<group>";
@@ -138,6 +157,8 @@
 		AFB0CC0723B1BBA30031BB77 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				AF51A6ED2446BC4700ACC2F3 /* app_icon@2x.png */,
+				AF51A6EE2446BC4800ACC2F3 /* app_icon@3x.png */,
 				AFB0CC0823B1BBA30031BB77 /* tabbar_dt@3x.png */,
 				AFB0CC0923B1BBA30031BB77 /* tabbar_dt@2x.png */,
 				AFB0CC0A23B1BBA30031BB77 /* tabbar_me@2x.png */,
@@ -168,7 +189,7 @@
 			);
 			name = TATMediaSDKDemo;
 			productName = TATMediaSDKDemo;
-			productReference = AF7061C9238FD0A40049710E /* TuiaSDKDemo.app */;
+			productReference = AF7061C9238FD0A40049710E /* TATMediaSDKDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -209,11 +230,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7061D9238FD0A50049710E /* LaunchScreen.storyboard in Resources */,
+				AF51A6EF2446BC4800ACC2F3 /* app_icon@2x.png in Resources */,
 				AFB0CC0E23B1BBA30031BB77 /* tabbar_dt@3x.png in Resources */,
 				AFB0CC1023B1BBA40031BB77 /* tabbar_me@2x.png in Resources */,
 				AFB0CC1323B1BBA40031BB77 /* tabbar_hd@2x.png in Resources */,
 				AF7061D6238FD0A50049710E /* Assets.xcassets in Resources */,
 				AFB0CC1123B1BBA40031BB77 /* tabbar_me@3x.png in Resources */,
+				AF51A6F02446BC4800ACC2F3 /* app_icon@3x.png in Resources */,
 				AFB0CC1223B1BBA40031BB77 /* tabbar_hd@3x.png in Resources */,
 				AFB0CC0F23B1BBA40031BB77 /* tabbar_dt@2x.png in Resources */,
 				AF7061D4238FD0A40049710E /* Main.storyboard in Resources */,
@@ -269,10 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF5E527023BB202900E990B3 /* TATSlotIDManager.m in Sources */,
+				AF51A6FC2446BC6B00ACC2F3 /* TATDiscoverViewController.m in Sources */,
 				AF7061D1238FD0A40049710E /* ViewController.m in Sources */,
+				AF51A6FA2446BC6B00ACC2F3 /* TATMediaManager.m in Sources */,
 				AF7061DC238FD0A60049710E /* main.m in Sources */,
+				AF51A6F92446BC6B00ACC2F3 /* TATSettingViewController.m in Sources */,
 				AF7061CE238FD0A40049710E /* AppDelegate.m in Sources */,
+				AF51A6FB2446BC6B00ACC2F3 /* TATUserManager.m in Sources */,
 				AF6D338423AB29360065FDF3 /* TATSimpleAdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +459,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuleslie.TATMediaSDKDemo;
-				PRODUCT_NAME = TuiaSDKDemo;
+				PRODUCT_NAME = TATMediaSDKDemo;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
@@ -461,7 +487,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuleslie.TATMediaSDKDemo;
-				PRODUCT_NAME = TuiaSDKDemo;
+				PRODUCT_NAME = TATMediaSDKDemo;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
