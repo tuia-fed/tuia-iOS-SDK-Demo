@@ -87,34 +87,11 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
 }
 
 + (NSString *)appKey {
-    switch ([TATMediaManager envType]) {
-        case TATEnvTypePublish:
-            return @"4UycwwZv41rwzne1ZXgtQBgDSnPH";
-        case TATEnvTypePre:
-            return @"3qKwty87tP6VxztdZB3CWnT5aNty";
-        case TATEnvTypeTest:
-            return @"427wTcUcwxkttDmGcqYMTU7NJo3k";
-        case TATEnvTypeDev:
-            return @"ctPo3s2hpcHx4HtGhBwqcdLvDnj";
-        default:
-            return nil;
-    }
+    return @"4UycwwZv41rwzne1ZXgtQBgDSnPH";
 }
 
 + (NSString *)appSecret {
-    switch ([TATMediaManager envType]) {
-        case TATEnvTypePublish:
-            return @"3WpyTLfifQyGhvgivxtUjvzXxtkzdceETBU2n5g";
-        case TATEnvTypePre:
-            return @"3WimkJ3GDAPKrD2o8xBGczJTdtDA9qLs2R4qAhQ";
-        case TATEnvTypeTest:
-            return @"3Wfp5DiA5jqVaUZ8CMkJemWopxefsBxtwm6mk67";
-        case TATEnvTypeDev:
-            return @"JwNQpF9wyRvskgj8ARk6H4rKDq4ZA159VSVJj";
-
-        default:
-            return nil;
-    }
+    return @"3WpyTLfifQyGhvgivxtUjvzXxtkzdceETBU2n5g";
 }
 
 
