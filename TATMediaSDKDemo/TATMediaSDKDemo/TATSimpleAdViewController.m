@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIView *adView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) TATAdConfiguration *adConfig;
+@property (nonatomic, strong) TATCustomAdModel *customModel;
 
 @end
 
@@ -72,6 +73,9 @@
         case TATSimpleAdTypeNative:
             self.title = @"原生插屏";
             break;
+        case TATSimpleAdTypeInfoFlow:
+            self.title = @"信息流";
+            break;
         default:
             break;
     }
@@ -104,40 +108,9 @@
     }];
     
     adView.clickAdBlock = ^(NSString * _Nullable slotId) {
-        NSString *message = [NSString stringWithFormat:@"点击广告位回调:%@", slotId];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self presentViewController:alert animated:YES completion:nil];
-        });
+        NSLog(@"点击广告位回调:%@", slotId);
     };
     
-    [self.adView removeFromSuperview];
-    self.adView = nil;
-    [self.view addSubview:adView];
-    self.adView = adView;
-}
-
-- (void)loadNativeAd {
-    __weak __typeof(self)weakSelf = self;
-    __block TATBaseAdView *adView = [TATMediaCenter initEmbedAdWithSlotId:self.slotId loadingOption:NO resultBlock:^(BOOL result, NSError * _Nonnull error) {
-        __strong __typeof(weakSelf)self = weakSelf;
-        if (result) {
-            CGRect frame = adView.frame;
-            CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
-            frame.origin.x = originX;
-            frame.origin.y = 126;
-            adView.frame = frame;
-            
-            CGRect buttonFrame = self.refreshButton.frame;
-            buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
-            self.refreshButton.frame = buttonFrame;
-        } else {
-            
-        }
-    }];
     [self.adView removeFromSuperview];
     self.adView = nil;
     [self.view addSubview:adView];
@@ -173,7 +146,9 @@
 }
 
 - (void)showInterstitialAd {
+    __weak __typeof(self)weakSelf = self;
     TATBaseAdView *adView = [TATMediaCenter showInterstitialWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError *error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (error) {
             [self showErrorAlert:error];
         }
@@ -182,13 +157,7 @@
     
     adView.clickAdBlock = ^(NSString * _Nullable slotId) {
         NSString *message = [NSString stringWithFormat:@"点击广告位回调:%@", slotId];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //[self presentViewController:alert animated:YES completion:nil];
-        });
+        NSLog(@"%@", message);
     };
 }
 
@@ -196,7 +165,9 @@
     TATLaunchAdConfiguration *launchConfig = [TATLaunchAdConfiguration defaultConfiguration];
     launchConfig.appKey = self.adConfig.appKey;
     launchConfig.appSecret = self.adConfig.appSecret;
+    __weak __typeof(self)weakSelf = self;
     TATBaseAdView *adView = [TATMediaCenter showLaunchAdWithSlotId:self.slotId configuration:launchConfig resultBlock:^(BOOL result, NSError *error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (error) {
             [self showErrorAlert:error];
         }
@@ -204,39 +175,63 @@
     
     adView.clickAdBlock = ^(NSString * _Nullable slotId) {
         NSString *message = [NSString stringWithFormat:@"点击广告位回调:%@", slotId];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //[self presentViewController:alert animated:YES completion:nil];
-        });
+        NSLog(@"%@", message);
     };
 }
 
 - (void)fetchCustomAd {
+    __weak __typeof(self)weakSelf = self;
     [TATMediaCenter fetchCustomAdWithSlotId:self.slotId configuration:self.adConfig completion:^(NSError *error, TATCustomAdModel *model) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (error) {
             [self showErrorAlert:error];
         } else {
-            NSString *activityUrl = [model.activityUrl stringByAppendingString:@"&userId=129600"];
-            [TATMediaCenter loadActivityURL:activityUrl slotId:self.slotId title:model.extTitle];
-            
-            NSString *message = [NSString stringWithFormat:@"activityUrl=%@ & imageUrl=%@ & extTitle=%@ & extDesc=%@", model.activityUrl, model.imageUrl, model.extTitle, model.extDesc];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"自定义广告返回" message:message preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
-
+            self.customModel = model;
+            // 展示自己的广告入口素材
+            [self displayCustomAd];
         }
     }];
 }
 
-- (void)showNativeAd {
-    self.adConfig.needLoading = NO;
+- (void)displayCustomAd {
+    // 加载自定义素材图标
+    UIImage *adImage = [UIImage imageNamed:@"custom_ad_placeholder"];
+    UIImageView *adImageView = [[UIImageView alloc] initWithImage:adImage];
+    adImageView.userInteractionEnabled = YES;
+    [adImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customAdClickAction)]];
+    [self.view addSubview:adImageView];
+    
+    CGRect frame = adImageView.frame;
+    CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
+    frame.origin.x = originX;
+    frame.origin.y = 126;
+    adImageView.frame = frame;
+    
+    CGRect buttonFrame = self.refreshButton.frame;
+    buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
+    self.refreshButton.frame = buttonFrame;
+    
+    [self.adView removeFromSuperview];
+    self.adView = nil;
+    self.adView = adImageView;
+    
+    // 上报曝光事件
+    [TATMediaCenter reportExposureWithURL:self.customModel.exposureUrl];
+}
 
+- (void)customAdClickAction {
+    // 上报用户点击事件
+    [TATMediaCenter reportClickWithURL:self.customModel.clickUrl];
+    // 拼接userId，也可以调用setUserId:接口，让SDK内部处理
+    NSString *activityUrl = [self.customModel.activityUrl stringByAppendingString:@"&userId=129600"];
+    // 推荐使用SDK提供的接口来加载活动
+    [TATMediaCenter loadActivityURL:activityUrl slotId:self.slotId title:self.customModel.extTitle];
+}
+
+- (void)showNativeAd {
+    __weak __typeof(self)weakSelf = self;
     [TATMediaCenter showFullModeAdWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError * _Nonnull error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (error) {
             [self showErrorAlert:error];
         }
@@ -244,10 +239,13 @@
 }
 
 - (void)loadInfoFlowView {
+    TATInfoFlowAdConfiguration *infoFlowConfig = [TATInfoFlowAdConfiguration defaultConfiguration];
+    infoFlowConfig.appKey = self.adConfig.appKey;
+    infoFlowConfig.appSecret = self.adConfig.appSecret;
     __weak __typeof(self)weakSelf = self;
-    __block TATBaseAdView *adView = [TATMediaCenter initInfoFlowAdWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError *error) {
+    __block TATBaseAdView *adView = [TATMediaCenter initInfoFlowAdWithSlotId:self.slotId configuration:infoFlowConfig resultBlock:^(BOOL result, NSError *error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (result) {
-            __strong __typeof(weakSelf)self = weakSelf;
             CGRect frame = adView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
             frame.origin.x = originX;
@@ -333,6 +331,8 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+
+#pragma mark - Getters
 
 - (UIButton *)refreshButton {
     if (!_refreshButton) {

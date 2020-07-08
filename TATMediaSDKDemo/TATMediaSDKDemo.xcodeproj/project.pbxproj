@@ -13,6 +13,7 @@
 		AF51A6FA2446BC6B00ACC2F3 /* TATMediaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F32446BC6A00ACC2F3 /* TATMediaManager.m */; };
 		AF51A6FB2446BC6B00ACC2F3 /* TATUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F52446BC6A00ACC2F3 /* TATUserManager.m */; };
 		AF51A6FC2446BC6B00ACC2F3 /* TATDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF51A6F72446BC6B00ACC2F3 /* TATDiscoverViewController.m */; };
+		AF566FFC24B5F9AC00413ED3 /* custom_ad_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AF566FFB24B5F9AC00413ED3 /* custom_ad_placeholder.png */; };
 		AF6D338423AB29360065FDF3 /* TATSimpleAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6D338323AB29350065FDF3 /* TATSimpleAdViewController.m */; };
 		AF7061CE238FD0A40049710E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7061CD238FD0A40049710E /* AppDelegate.m */; };
 		AF7061D1238FD0A40049710E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7061D0238FD0A40049710E /* ViewController.m */; };
@@ -55,6 +56,7 @@
 		AF51A6F62446BC6A00ACC2F3 /* TATSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATSettingViewController.h; sourceTree = "<group>"; };
 		AF51A6F72446BC6B00ACC2F3 /* TATDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATDiscoverViewController.m; sourceTree = "<group>"; };
 		AF51A6F82446BC6B00ACC2F3 /* TATDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATDiscoverViewController.h; sourceTree = "<group>"; };
+		AF566FFB24B5F9AC00413ED3 /* custom_ad_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_ad_placeholder.png; sourceTree = "<group>"; };
 		AF6D338223AB29350065FDF3 /* TATSimpleAdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TATSimpleAdViewController.h; sourceTree = "<group>"; };
 		AF6D338323AB29350065FDF3 /* TATSimpleAdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TATSimpleAdViewController.m; sourceTree = "<group>"; };
 		AF7061C9238FD0A40049710E /* TATMediaSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TATMediaSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,7 @@
 		AF7061DA238FD0A50049710E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF7061DB238FD0A60049710E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF7062122390CE6B0049710E /* TATMediaSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TATMediaSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF70B28024A9983C00386B93 /* TATMediaSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TATMediaSDKDemo.entitlements; sourceTree = "<group>"; };
 		AFB0CC0823B1BBA30031BB77 /* tabbar_dt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_dt@3x.png"; sourceTree = "<group>"; };
 		AFB0CC0923B1BBA30031BB77 /* tabbar_dt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_dt@2x.png"; sourceTree = "<group>"; };
 		AFB0CC0A23B1BBA30031BB77 /* tabbar_me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_me@2x.png"; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		AF7061CB238FD0A40049710E /* TATMediaSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AF70B28024A9983C00386B93 /* TATMediaSDKDemo.entitlements */,
 				AFB0CC0723B1BBA30031BB77 /* Resource */,
 				AF7061CC238FD0A40049710E /* AppDelegate.h */,
 				AF7061CD238FD0A40049710E /* AppDelegate.m */,
@@ -157,6 +161,7 @@
 		AFB0CC0723B1BBA30031BB77 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				AF566FFB24B5F9AC00413ED3 /* custom_ad_placeholder.png */,
 				AF51A6ED2446BC4700ACC2F3 /* app_icon@2x.png */,
 				AF51A6EE2446BC4800ACC2F3 /* app_icon@3x.png */,
 				AFB0CC0823B1BBA30031BB77 /* tabbar_dt@3x.png */,
@@ -234,6 +239,7 @@
 				AFB0CC0E23B1BBA30031BB77 /* tabbar_dt@3x.png in Resources */,
 				AFB0CC1023B1BBA40031BB77 /* tabbar_me@2x.png in Resources */,
 				AFB0CC1323B1BBA40031BB77 /* tabbar_hd@2x.png in Resources */,
+				AF566FFC24B5F9AC00413ED3 /* custom_ad_placeholder.png in Resources */,
 				AF7061D6238FD0A50049710E /* Assets.xcassets in Resources */,
 				AFB0CC1123B1BBA40031BB77 /* tabbar_me@3x.png in Resources */,
 				AF51A6F02446BC4800ACC2F3 /* app_icon@3x.png in Resources */,
@@ -442,6 +448,7 @@
 			baseConfigurationReference = 4CE7A442D91A717659BE5107 /* Pods-TATMediaSDKDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TATMediaSDKDemo/TATMediaSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B5SHZ6N8K5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -470,6 +477,7 @@
 			baseConfigurationReference = F7813188E46C49B0E628EE03 /* Pods-TATMediaSDKDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TATMediaSDKDemo/TATMediaSDKDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B5SHZ6N8K5;
 				FRAMEWORK_SEARCH_PATHS = (

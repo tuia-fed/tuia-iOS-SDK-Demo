@@ -109,7 +109,7 @@
 }
 
 - (void)fetchNativeAdResource {
-    [TATMediaCenter fetchNativeAdResourceBySlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeNative] resultBlock:^(UIImage *image, NSError *error) {
+    [TATMediaCenter fetchNativeAdResourceBySlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeNative] resultBlock:^(UIImage *image, NSString *url, NSError *error) {
         if (image) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.imageView removeFromSuperview];
@@ -121,7 +121,7 @@
                 frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - 116;
                 self.imageView.frame = frame;
                 self.imageView.userInteractionEnabled = YES;
-                [self.imageView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNativeAD)]];
+                [self.imageView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNativeAd)]];
                 [self.view addSubview:self.imageView];
             });
         }
@@ -129,7 +129,7 @@
 }
 
 - (void)showNativeAd {
-    [TATMediaCenter showFullModeAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeNative] loadingOption:YES resultBlock:^(BOOL result, NSError * _Nonnull error) {
+    [TATMediaCenter showFullModeAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeNative] resultBlock:^(BOOL result, NSError * _Nonnull error) {
         if (!result) {
             NSString *message = error.userInfo[NSLocalizedDescriptionKey];
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];

@@ -13,6 +13,7 @@
 #import "TATSettingViewController.h"
 #import "TATUserManager.h"
 #import "TATMediaManager.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate ()
 
@@ -41,29 +42,16 @@
     
     [TATMediaCenter sharedInstance].rewardHandler = ^(NSString * _Nullable rewardJson) {
         NSString *message = [NSString stringWithFormat:@"激励发奖回调:%@", rewardJson];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        NSLog(@"%@", message);
     };
     [TATMediaCenter sharedInstance].closeHandler = ^(NSString * _Nullable closeJson) {
         NSString *message = [NSString stringWithFormat:@"激励关闭回调:%@", closeJson];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-
+        NSLog(@"%@", message);
     };
     
     [TATMediaCenter sharedInstance].closeH5Block = ^(NSString * _Nullable slotId){
         NSString *message = [NSString stringWithFormat:@"关闭活动页回调:%@", slotId];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        NSLog(@"%@", message);
     };
     return YES;
 }
