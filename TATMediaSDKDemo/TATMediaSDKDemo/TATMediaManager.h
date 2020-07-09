@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, TATSimpleAdType){
     TATSimpleAdTypeDownload, // 下载类横幅
     TATSimpleAdTypeNative, // 原生插屏
     TATSimpleAdTypeInfoFlow, // 信息流
+    TATSimpleAdTypeTextLink, // 文字链
 };
 
 typedef NS_ENUM(NSUInteger, TATEnvType){

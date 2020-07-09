@@ -24,7 +24,9 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
         @(TATSimpleAdTypeNative): @"325021",
         @(TATSimpleAdTypeNative): @"331981",
         @(TATSimpleAdTypeNative): @"325613",
-        @(TATSimpleAdTypeInfoFlow): @"331035"};
+        @(TATSimpleAdTypeInfoFlow): @"331035",
+        @(TATSimpleAdTypeTextLink): @"347174"
+    };
 }
 
 + (NSDictionary *)slotDataDictionary {
@@ -63,6 +65,9 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
                 break;
             case TATSimpleAdTypeInfoFlow:
                 title = @"信息流";
+                break;
+            case TATSimpleAdTypeTextLink:
+                title = @"文字链";
                 break;
             default:
                 break;

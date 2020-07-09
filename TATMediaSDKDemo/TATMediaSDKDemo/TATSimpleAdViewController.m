@@ -85,6 +85,39 @@
     self.slotId = [TATMediaManager slotIdForType:self.adType];
 }
 
+#pragma mark - 加载广告
+
+- (void)loadAd {
+    switch (self.adType) {
+        case TATSimpleAdTypeBanner:
+        case TATSimpleAdTypeThinBanner:
+        case TATSimpleAdTypeFloat:
+        case TATSimpleAdTypeDownload:
+            [self loadGeneralAd];
+            break;
+        case TATSimpleAdTypeCustom:
+            [self fetchCustomAd];
+            break;
+        case TATSimpleAdTypeInterstitial:
+            [self showInterstitialAd];
+            break;
+        case TATSimpleAdTypeLaunch:
+            [self showLaunchAd];
+            break;
+        case TATSimpleAdTypeNative:
+            [self showNativeAd];
+            break;
+        case TATSimpleAdTypeInfoFlow:
+            [self loadInfoFlowView];
+            break;
+        case TATSimpleAdTypeTextLink:
+            [self loadTextLinkAd];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)loadGeneralAd {
     __weak __typeof(self)weakSelf = self;
     __block TATBaseAdView *adView = [TATMediaCenter initSimpleAdWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError *error) {
@@ -115,34 +148,6 @@
     self.adView = nil;
     [self.view addSubview:adView];
     self.adView = adView;
-}
-
-- (void)loadAd {
-    switch (self.adType) {
-        case TATSimpleAdTypeBanner:
-        case TATSimpleAdTypeThinBanner:
-        case TATSimpleAdTypeFloat:
-        case TATSimpleAdTypeDownload:
-            [self loadGeneralAd];
-            break;
-        case TATSimpleAdTypeCustom:
-            [self fetchCustomAd];
-            break;
-        case TATSimpleAdTypeInterstitial:
-            [self showInterstitialAd];
-            break;
-        case TATSimpleAdTypeLaunch:
-            [self showLaunchAd];
-            break;
-        case TATSimpleAdTypeNative:
-            [self showNativeAd];
-            break;
-        case TATSimpleAdTypeInfoFlow:
-            [self loadInfoFlowView];
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)showInterstitialAd {
@@ -194,7 +199,7 @@
 }
 
 - (void)displayCustomAd {
-    // 加载自定义素材图标
+    // 加载自定义素材图标，并上报曝光事件
     UIImage *adImage = [UIImage imageNamed:@"custom_ad_placeholder"];
     UIImageView *adImageView = [[UIImageView alloc] initWithImage:adImage];
     adImageView.userInteractionEnabled = YES;
@@ -268,6 +273,34 @@
     [self.view addSubview:adView];
     self.adView = adView;
 
+}
+
+- (void)loadTextLinkAd {
+    __weak __typeof(self)weakSelf = self;
+    __block TATBaseAdView *adView = [TATMediaCenter initTextLinkAdWithSlotId:self.slotId resultBlock:^(BOOL result, NSError *error) {
+        if (result) {
+            __strong __typeof(weakSelf)self = weakSelf;
+            CGRect frame = adView.frame;
+            CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
+            frame.origin.x = originX;
+            frame.origin.y = 126;
+            adView.frame = frame;
+            
+            CGRect buttonFrame = self.refreshButton.frame;
+            buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
+            self.refreshButton.frame = buttonFrame;
+        } else {
+            if (error) {
+                [self showErrorAlert:error];
+            }
+
+        }
+    }];
+        
+    [self.adView removeFromSuperview];
+    self.adView = nil;
+    [self.view addSubview:adView];
+    self.adView = adView;
 }
 
 - (void)showErrorAlert:(NSError *)error {
