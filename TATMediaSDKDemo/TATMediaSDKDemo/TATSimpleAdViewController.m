@@ -119,16 +119,16 @@
 }
 
 - (void)loadGeneralAd {
+    [self.adView removeFromSuperview];
     __weak __typeof(self)weakSelf = self;
-    __block TATBaseAdView *adView = [TATMediaCenter initSimpleAdWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError *error) {
+    self.adView = [TATMediaCenter initSimpleAdWithSlotId:self.slotId configuration:self.adConfig resultBlock:^(BOOL result, NSError *error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (result) {
-            __strong __typeof(weakSelf)self = weakSelf;
-            CGRect frame = adView.frame;
+            CGRect frame = self.adView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
             frame.origin.x = originX;
             frame.origin.y = 126;
-            adView.frame = frame;
-            
+            self.adView.frame = frame;
             CGRect buttonFrame = self.refreshButton.frame;
             buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
             self.refreshButton.frame = buttonFrame;
@@ -136,18 +136,13 @@
             if (error) {
                 [self showErrorAlert:error];
             }
-
         }
     }];
-    
+    TATBaseAdView *adView = (TATBaseAdView *)self.adView;
     adView.clickAdBlock = ^(NSString * _Nullable slotId) {
         NSLog(@"点击广告位回调:%@", slotId);
     };
-    
-    [self.adView removeFromSuperview];
-    self.adView = nil;
     [self.view addSubview:adView];
-    self.adView = adView;
 }
 
 - (void)showInterstitialAd {
@@ -247,15 +242,16 @@
     TATInfoFlowAdConfiguration *infoFlowConfig = [TATInfoFlowAdConfiguration defaultConfiguration];
     infoFlowConfig.appKey = self.adConfig.appKey;
     infoFlowConfig.appSecret = self.adConfig.appSecret;
+    [self.adView removeFromSuperview];
     __weak __typeof(self)weakSelf = self;
-    __block TATBaseAdView *adView = [TATMediaCenter initInfoFlowAdWithSlotId:self.slotId configuration:infoFlowConfig resultBlock:^(BOOL result, NSError *error) {
+    self.adView = [TATMediaCenter initInfoFlowAdWithSlotId:self.slotId configuration:infoFlowConfig resultBlock:^(BOOL result, NSError *error) {
         __strong __typeof(weakSelf)self = weakSelf;
         if (result) {
-            CGRect frame = adView.frame;
+            CGRect frame = self.adView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
             frame.origin.x = originX;
             frame.origin.y = 126;
-            adView.frame = frame;
+            self.adView.frame = frame;
             
             CGRect buttonFrame = self.refreshButton.frame;
             buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
@@ -268,23 +264,22 @@
         }
     }];
         
-    [self.adView removeFromSuperview];
-    self.adView = nil;
-    [self.view addSubview:adView];
-    self.adView = adView;
+
+    [self.view addSubview:self.adView];
 
 }
 
 - (void)loadTextLinkAd {
+    [self.adView removeFromSuperview];
     __weak __typeof(self)weakSelf = self;
-    __block TATBaseAdView *adView = [TATMediaCenter initTextLinkAdWithSlotId:self.slotId resultBlock:^(BOOL result, NSError *error) {
+    self.adView = [TATMediaCenter initTextLinkAdWithSlotId:self.slotId resultBlock:^(BOOL result, NSError *error) {
+        __strong __typeof(weakSelf)self = weakSelf;
         if (result) {
-            __strong __typeof(weakSelf)self = weakSelf;
-            CGRect frame = adView.frame;
+            CGRect frame = self.adView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
             frame.origin.x = originX;
             frame.origin.y = 126;
-            adView.frame = frame;
+            self.adView.frame = frame;
             
             CGRect buttonFrame = self.refreshButton.frame;
             buttonFrame.origin.y = frame.origin.y + frame.size.height + 30;
@@ -296,11 +291,7 @@
 
         }
     }];
-        
-    [self.adView removeFromSuperview];
-    self.adView = nil;
-    [self.view addSubview:adView];
-    self.adView = adView;
+    [self.view addSubview:self.adView];
 }
 
 - (void)showErrorAlert:(NSError *)error {
