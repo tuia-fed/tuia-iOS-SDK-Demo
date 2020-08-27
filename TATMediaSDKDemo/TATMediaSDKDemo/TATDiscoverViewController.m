@@ -36,24 +36,22 @@
 }
 
 - (void)showBannerAd {
+    [self.bannerView removeFromSuperview];
     __weak typeof(self)weakself = self;
-    __block UIView *adView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeBanner] resultBlock:^(BOOL result, NSError *error) {
+    self.bannerView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeBanner] resultBlock:^(BOOL result, NSError *error) {
         if (result) {
             __strong typeof(weakself)self = weakself;
-            CGRect frame = adView.frame;
+            CGRect frame = self.bannerView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) / 2;
             frame.origin.x = originX;
             frame.origin.y = 88 + 16;
-            adView.frame = frame;
+            self.bannerView.frame = frame;
             [self relayoutWebView];
         } else {
             
         }
     }];
-    [self.bannerView removeFromSuperview];
-    self.bannerView = nil;
-    [self.view addSubview:adView];
-    self.bannerView = adView;
+    [self.view addSubview:self.bannerView];
 }
 
 - (void)configWebView {
@@ -71,21 +69,20 @@
 }
 
 - (void)showFloatAd {
-    __block UIView *adView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeFloat] resultBlock:^(BOOL result, NSError *error) {
+    [self.floatView removeFromSuperview];
+
+    self.floatView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeFloat] resultBlock:^(BOOL result, NSError *error) {
         if (result) {
-            CGRect frame = adView.frame;
+            CGRect frame = self.floatView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) - 16;
             frame.origin.x = originX;
             frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - 116;
-            adView.frame = frame;
+            self.floatView.frame = frame;
         } else {
             
         }
     }];
-    [self.floatView removeFromSuperview];
-    self.floatView = nil;
-    [self.view addSubview:adView];
-    self.floatView = adView;
+    [self.view addSubview:self.floatView];
 }
 
 

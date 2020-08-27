@@ -105,18 +105,21 @@
 }
 
 - (void)showFloatAd {
-    __block TATBaseAdView *adView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeFloat] resultBlock:^(BOOL result, NSError *error) {
+    [self.floatView removeFromSuperview];
+    __weak typeof(self)weakSelf = self;
+    self.floatView = [TATMediaCenter initSimpleAdWithSlotId:[TATMediaManager slotIdForType:TATSimpleAdTypeFloat] resultBlock:^(BOOL result, NSError *error) {
+        __strong typeof(weakSelf)self = weakSelf;
         if (result) {
-            CGRect frame = adView.frame;
+            CGRect frame = self.floatView.frame;
             CGFloat originX = ([UIScreen mainScreen].bounds.size.width - frame.size.width) - 16;
             frame.origin.x = originX;
             frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - 116;
-            adView.frame = frame;
+            self.floatView.frame = frame;
         } else {
             
         }
     }];
-    
+    TATBaseAdView *adView = (TATBaseAdView *)self.floatView;
     adView.clickAdBlock = ^(NSString * _Nullable slotId) {
         NSString *message = [NSString stringWithFormat:@"点击广告位回调:%@", slotId];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -124,14 +127,11 @@
             
         }]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self presentViewController:alert animated:YES completion:nil];
+            [weakSelf presentViewController:alert animated:YES completion:nil];
         });
     };
     
-    [self.floatView removeFromSuperview];
-    self.floatView = nil;
-    [self.view addSubview:adView];
-    self.floatView = adView;
+    [self.view addSubview:self.floatView];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
