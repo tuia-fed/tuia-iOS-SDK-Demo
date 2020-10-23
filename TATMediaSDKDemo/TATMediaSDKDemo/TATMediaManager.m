@@ -20,12 +20,14 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
 }
 
 + (NSDictionary *)slotIdInfo {
-    return @{@(TATSimpleAdTypeThinBanner): @"323777", @(TATSimpleAdTypeBanner): @"323778", @(TATSimpleAdTypeFloat): @"323779", @(TATSimpleAdTypeCustom): @"331868", @(TATSimpleAdTypeLaunch): @"323775", @(TATSimpleAdTypeInterstitial): @"323776", @(TATSimpleAdTypeDownload): @"326629",
+    return @{@(TATSimpleAdTypeThinBanner): @"323777", @(TATSimpleAdTypeBanner): @"323778",  @(TATSimpleAdTypeCustom): @"331868", @(TATSimpleAdTypeLaunch): @"323775", @(TATSimpleAdTypeInterstitial): @"323776", @(TATSimpleAdTypeDownload): @"326629",
         @(TATSimpleAdTypeNative): @"325021",
         @(TATSimpleAdTypeNative): @"331981",
         @(TATSimpleAdTypeNative): @"325613",
         @(TATSimpleAdTypeInfoFlow): @"331035",
-        @(TATSimpleAdTypeTextLink): @"347174"
+        @(TATSimpleAdTypeTextLink): @"347174",
+        @(TATSimpleAdTypeFloatUpgrade): @"364648"
+
     };
 }
 
@@ -44,9 +46,6 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
                 break;
             case TATSimpleAdTypeThinBanner:
                 title = @"横幅";
-                break;
-            case TATSimpleAdTypeFloat:
-                title = @"浮标";
                 break;
             case TATSimpleAdTypeLaunch:
                 title = @"开屏";
@@ -68,6 +67,9 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
                 break;
             case TATSimpleAdTypeTextLink:
                 title = @"文字链";
+                break;
+            case TATSimpleAdTypeFloatUpgrade:
+                title = @"悬浮升级";
                 break;
             default:
                 break;

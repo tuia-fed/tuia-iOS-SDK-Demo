@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, TATSimpleAdType){
     TATSimpleAdTypeNative, // 原生插屏
     TATSimpleAdTypeInfoFlow, // 信息流
     TATSimpleAdTypeTextLink, // 文字链
+    TATSimpleAdTypeFloatUpgrade, // 悬浮升级
 };
 
 typedef NS_ENUM(NSUInteger, TATEnvType){
