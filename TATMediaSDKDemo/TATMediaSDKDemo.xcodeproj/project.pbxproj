@@ -203,7 +203,7 @@
 		AF7061C1238FD0A40049710E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = tuia;
 				TargetAttributes = {
 					AF7061C8238FD0A40049710E = {
@@ -357,6 +357,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -416,6 +417,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -456,7 +458,7 @@
 					"$(PROJECT_DIR)/TATMediaSDKDemo",
 				);
 				INFOPLIST_FILE = TATMediaSDKDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,7 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuleslie.TATMediaSDKDemo;
 				PRODUCT_NAME = TATMediaSDKDemo;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "arm64 arm64e armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7s x86_64";
 			};
 			name = Debug;
 		};
@@ -485,7 +487,7 @@
 					"$(PROJECT_DIR)/TATMediaSDKDemo",
 				);
 				INFOPLIST_FILE = TATMediaSDKDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,7 +499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuleslie.TATMediaSDKDemo;
 				PRODUCT_NAME = TATMediaSDKDemo;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "arm64 arm64e armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7s x86_64";
 			};
 			name = Release;
 		};
