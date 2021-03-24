@@ -34,10 +34,6 @@ static NSString *const kDeviceIdKey = @"kDeviceIdKey";
         } else {
             self.userId = @"190026";
         }
-        NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceIdKey];
-        if (deviceId) {
-            self.deviceId = deviceId;
-        }
     }
     return self;
 }
@@ -49,15 +45,6 @@ static NSString *const kDeviceIdKey = @"kDeviceIdKey";
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     [TATMediaCenter setUserId:userId];
-}
-
-- (void)setDeviceId:(NSString *)deviceId {
-    _deviceId = deviceId;
-    if (deviceId) {
-        [[NSUserDefaults standardUserDefaults]  setObject:deviceId forKey:kDeviceIdKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    [TATMediaCenter setDeviceId:deviceId];
 }
 
 @end

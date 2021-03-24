@@ -10,7 +10,7 @@
 #import <TATMediaSDK/TATMediaSDK.h>
 #import "TATUserManager.h"
 
-@interface TATSimpleAdViewController ()
+@interface TATSimpleAdViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, assign) TATSimpleAdType adType;
 @property (nonatomic, copy) NSString *slotId;
@@ -18,15 +18,12 @@
 @property (nonatomic, assign, getter=isUseCustomSize) BOOL useCustomSize;
 @property (nonatomic, assign) CGFloat customWidth;
 @property (nonatomic, assign) CGFloat customHeight;
-/** <#summary#> */
 @property (nonatomic, strong)UIView *localView;
-/** <#summary#> */
 @property (nonatomic, strong)UIButton *localOpenButton;
 @property (nonatomic, strong)UIButton *localCloseButton;
 @property (nonatomic, strong)UIImageView *localImageView;
 @property (nonatomic, strong) UIButton *localImageButton;
 @property (nonatomic, strong) UITextField *localImageURLTextField;
-/** <#summary#> */
 @property (nonatomic, strong)NSString *customSlotId;
 @property (nonatomic, strong) UIView *adView;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -45,9 +42,11 @@
     }
     return self;
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigationTitle];
@@ -59,8 +58,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"配置" style:UIBarButtonItemStylePlain target:self action:@selector(showInputParamsField)];
     [self setupLocalUI];
 }
-- (void)setupLocalUI {
 
+- (void)setupLocalUI {
     if (self.adType == TATSimpleAdTypeBanner || self.adType == TATSimpleAdTypeFloat || self.adType == TATSimpleAdTypeThinBanner || self.adType == TATSimpleAdTypeLaunch || self.adType == TATSimpleAdTypeInterstitial || self.adType == TATSimpleAdTypeDownload) {
         [self.localView addSubview:self.localImageView];
         [self.localView addSubview:self.localImageButton];
@@ -73,6 +72,7 @@
         [self localCloseButtonDidOnClick];
     }
 }
+
 - (void)setupAdConfiguration {
     self.adConfig = [[TATAdConfiguration alloc] init];
     self.adConfig.appKey = [TATMediaManager appKey];
@@ -352,6 +352,7 @@
     }];
     [self.view addSubview:self.adView];
 }
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (object == self.refreshButton && [keyPath isEqualToString:@"frame"]
         && self.localView.superview != nil) {
@@ -365,6 +366,7 @@
 - (void)dealloc {
     [self.refreshButton removeObserver:self forKeyPath:@"frame"];
 }
+
 - (void)showFloatUpgrade {
     TATFloatUpgradeAdConfiguration *upgradeConfig = [TATFloatUpgradeAdConfiguration new];
     upgradeConfig.appKey = self.adConfig.appKey;
@@ -376,6 +378,7 @@
         
     }];
 }
+
 - (void)showErrorAlert:(NSError *)error {
     NSString *message = error.userInfo[NSLocalizedDescriptionKey];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -384,6 +387,7 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
 - (void)chooseLocalImage {
     UIImagePickerController *photoVc = [[UIImagePickerController alloc] init];
     photoVc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -478,10 +482,6 @@
             
             CFRelease(source);
         }
-        
-        
-
-        
     } else {
         // Fallback on earlier versions
     }
@@ -632,6 +632,7 @@
     }
     return _localImageView;
 }
+
 - (UITextField *)localImageURLTextField {
     if (!_localImageURLTextField) {
         _localImageURLTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(self.localImageButton.frame) + 5, [UIScreen mainScreen].bounds.size.width - 30, 35)];
@@ -641,6 +642,7 @@
     }
     return _localImageURLTextField;
 }
+
 - (UIButton *)localImageButton {
     if (!_localImageButton) {
         CGFloat originX = ([UIScreen mainScreen].bounds.size.width - 180) / 2;
@@ -653,6 +655,7 @@
     }
     return _localImageButton;
 }
+
 - (UIButton *)refreshButton {
     if (!_refreshButton) {
         CGFloat originX = ([UIScreen mainScreen].bounds.size.width - 100) / 2;

@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:119.0/255 green:211.0/255 blue:220.0/255 alpha:1.0]; // 61 162 132
-    self.dataArray = @[@"设置用户ID", @"设置device ID"];
+    self.dataArray = @[@"设置用户ID"];
     CGRect frame = CGRectMake(0, 88, self.view.bounds.size.width, self.view.bounds.size.height - 88);
     self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -68,39 +68,6 @@
         return;
     }
     [TATUserManager sharedInstance].userId = userId;
-    [self.tableView reloadData];
-}
-
-- (void)showInputDeviceIdField {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"设置device ID" message:@"请输device_id" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        //响应事件，这里只有一个，也只简单处理第一个
-        NSString *text = alert.textFields.firstObject.text;
-        [self setDeviceId:text];
-    }];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        //响应事件
-        NSLog(@"action = %@", alert.textFields);
-    }];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"device ID";
-    }];
-    
-    [alert addAction:okAction];
-    [alert addAction:cancelAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)setDeviceId: (NSString *)deviceId {
-    if (!deviceId) {
-        return;
-    }
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    deviceId = [(NSString *)deviceId stringByTrimmingCharactersInSet:charSet];
-    if (deviceId.length <= 0) {
-        return;
-    }
-    [TATUserManager sharedInstance].deviceId = deviceId;
     [self.tableView reloadData];
 }
 
@@ -155,8 +122,6 @@
     }
     if (indexPath.row == 0) {
         cell.detailTextLabel.text = [TATUserManager sharedInstance].userId;
-    } else if (indexPath.row == 1) {
-        cell.detailTextLabel.text = [TATUserManager sharedInstance].deviceId;
     } else {
         cell.detailTextLabel.text = @"";
     }
@@ -167,9 +132,6 @@
     switch (indexPath.row) {
         case 0:
             [self showUserIdInputField];
-            break;
-        case 1:
-            [self showInputDeviceIdField];
             break;
         default:
             break;

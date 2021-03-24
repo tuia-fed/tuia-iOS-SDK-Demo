@@ -11,7 +11,6 @@
 @interface TATUserManager : NSObject
 
 @property (nonatomic, copy) NSString *userId;
-@property (nonatomic, copy) NSString *deviceId;
 
 + (instancetype)sharedInstance;
 
