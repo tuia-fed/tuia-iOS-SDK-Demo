@@ -26,8 +26,8 @@ NSString *const kSlotTypeListKey = @"kSlotTypeListKey";
         @(TATSimpleAdTypeNative): @"325613",
         @(TATSimpleAdTypeInfoFlow): @"331035",
         @(TATSimpleAdTypeTextLink): @"347174",
-        @(TATSimpleAdTypeFloatUpgrade): @"364648"
-
+        @(TATSimpleAdTypeFloatUpgrade): @"364648",
+        @(TATSimpleAdTypeFloat): @"323779",
     };
 }
 
